@@ -29,6 +29,10 @@ ENV NODE_ENV=production
 # Copy source code
 COPY . .
 
+# Install NestJS CLI globally again in case it's not available in this stage
+RUN npm install -g @nestjs/cli
+
+
 # Build the application
 RUN yarn build:api-gateway
 
