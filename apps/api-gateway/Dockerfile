@@ -1,5 +1,3 @@
-#API Gateway Docker
-
 # Use the base image
 FROM node:20-alpine AS base
 
@@ -9,9 +7,11 @@ WORKDIR /app
 # Install dependencies only when needed
 COPY package*.json ./
 
-# Install dependencies and NestJS CLI
-RUN npm install && \
-    npm install -g @nestjs/cli
+# Install dependencies
+RUN npm install
+
+# Install NestJS CLI globally in case we want to use it later
+RUN npm install -g @nestjs/cli
 
 # Copy shared libraries
 COPY libs ./libs
@@ -29,12 +29,11 @@ ENV NODE_ENV=production
 # Copy source code
 COPY . .
 
-# Install NestJS CLI globally again in case it's not available in this stage
-RUN npm install -g @nestjs/cli
+# Install dependencies (NestJS CLI will be available in node_modules now)
+RUN npm install
 
-
-# Build the application
-RUN yarn build:api-gateway
+# Use npx to run the build command
+RUN npx nest build
 
 # Production stage
 FROM node:20-alpine AS production
