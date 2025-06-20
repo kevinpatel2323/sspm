@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package invitation;
+
+// Import base proto if needed
+import "base.proto";
+
+// Invitation message definition
+message Invitation {
+  string id = 1;
+  string email = 2;
+  string status = 3;  // PENDING, ACCEPTED, REJECTED, EXPIRED
+  string role = 4;    // ADMIN, USER, etc.
+  string tenant_id = 5;
+  string created_by = 6;
+  string created_at = 7;
+  string updated_at = 8;
+  string expires_at = 9;
+}
+
+// Create invitation request
+message CreateInvitationRequest {
+  string email = 1;
+  string role = 2;
+  string tenant_id = 3;
+  string created_by = 4;
+}
+
+// Create invitation response
+message CreateInvitationResponse {
+  Invitation invitation = 1;
+}
+
+// Get invitation request
+message GetInvitationRequest {
+  string id = 1;
+}
+
+// Get invitation response
+message GetInvitationResponse {
+  Invitation invitation = 1;
+}
+
+// List invitations request
+message ListInvitationsRequest {
+  string tenant_id = 1;
+  string status = 2;  // Optional filter
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+// List invitations response
+message ListInvitationsResponse {
+  repeated Invitation invitations = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 limit = 4;
+}
+
+// Update invitation status request
+message UpdateInvitationStatusRequest {
+  string id = 1;
+  string status = 2;  // ACCEPTED, REJECTED, EXPIRED
+}
+
+// Update invitation status response
+message UpdateInvitationStatusResponse {
+  Invitation invitation = 1;
+}
+
+// Delete invitation request
+message DeleteInvitationRequest {
+  string id = 1;
+}
+
+// Delete invitation response
+message DeleteInvitationResponse {
+  bool success = 1;
+}
+
+// Invitation service definition
+service InvitationService {
+  // Create a new invitation
+  rpc CreateInvitation(CreateInvitationRequest) returns (CreateInvitationResponse) {}
+  
+  // Get a single invitation by ID
+  rpc GetInvitation(GetInvitationRequest) returns (GetInvitationResponse) {}
+  
+  // List invitations with optional filters
+  rpc ListInvitations(ListInvitationsRequest) returns (ListInvitationsResponse) {}
+  
+  // Update invitation status
+  rpc UpdateInvitationStatus(UpdateInvitationStatusRequest) returns (UpdateInvitationStatusResponse) {}
+  
+  // Delete an invitation
+  rpc DeleteInvitation(DeleteInvitationRequest) returns (DeleteInvitationResponse) {}
+} 

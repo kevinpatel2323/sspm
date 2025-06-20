@@ -1,0 +1,21 @@
+{
+  "name": "sspm-infrastructure",
+  "version": "1.0.0",
+  "description": "Pulumi IaC for SSPM microservices on AWS ECS, RDS, DocumentDB, ECR, and ALB.",
+  "main": "index.ts",
+  "scripts": {
+    "up": "pulumi up",
+    "preview": "pulumi preview",
+    "destroy": "pulumi destroy",
+    "refresh": "pulumi refresh"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.0.0",
+    "@pulumi/aws": "^5.0.0",
+    "@pulumi/awsx": "^1.0.0",
+    "@pulumi/docker": "^4.0.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "MIT"
+}

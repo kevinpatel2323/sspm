@@ -1,0 +1,10 @@
+config:
+  aws:region: ap-south-1
+  sspm-infrastructure:dbUser: postgres
+  sspm-infrastructure:dbName: sspm_central_db
+  sspm-infrastructure:dbPort: "5432"
+  sspm-infrastructure:awsCognitoUserPoolId: ap-south-1_ZDadjBfHh
+  sspm-infrastructure:awsCognitoClientId: 23415j3ct0al8nkrl6ilbv8amk
+  sspm-infrastructure:ssoRedirectUri: http://localhost:3000/auth/sso/callback
+  sspm-infrastructure:awsCognitoClientSecret:
+    secure: AAABAHTPE9GYPpSFilGaY8lkaj+iKdvy1Th10DkCTQGqtpkN8etLlrbzDZhXedY0Ogt5htGfU489UIdI1WM9YIF5hFyMqKzOPoSGHGiTWcZ7iLYf
